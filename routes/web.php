@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PracticeController;
+use App\Http\Controllers\MovieController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,25 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('practice', function() {
-//     return response('practice');
-// });
 
-// Route::get('practice2', function() {
-//     $test = 'practice2';
-// return response($test);
-// });
-
-// Route::get('practice3', function() {
-//     $test = 'test';
-// return response($test);
-// });
-
-
-
-// Route::get('URL', [Controllerの名前::class, 'Controller内のfunction名']);
 Route::get('/practice', [PracticeController::class, 'sample']);
 Route::get('/practice2', [PracticeController::class, 'sample2']);
 Route::get('/practice3', [PracticeController::class, 'sample3']);
 
-Route::get('/getPractice', [PracticeController::class, 'getPractice']);
+// Route::get('/getPractice', [PracticeController::class, 'getPractice']);
+
+Route::get('/movies', [MovieController::class, 'index']);

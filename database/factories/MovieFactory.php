@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Movie;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MovieFactory extends Factory
@@ -11,6 +11,10 @@ class MovieFactory extends Factory
      *
      * @return array
      */
+
+    
+    protected $model = Movie::class;
+    
     public function definition()
     {
         return [
