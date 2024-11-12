@@ -21,4 +21,7 @@ class Movie extends Model
         'description' => null,
         'is_showing' => true,
     ];
+    protected $casts = [
+        'is_showing' => 'boolean',
+    ];
 }

@@ -23,12 +23,14 @@ Route::get('/', function () {
 });
 
 
-Route::get('/practice', [PracticeController::class, 'sample']);
 
 
 Route::get('/movies', [MovieController::class, 'index']);
 
+
 Route::prefix('admin')->group(function () {
     Route::get('/movies', [AdminMovieController::class, 'index'])->name('admin.movies.index');
+    Route::get('/movies/create', [AdminMovieController::class, 'create'])->name('admin.movies.create');
+    Route::post('/movies/store', [AdminMovieController::class, 'store'])->name('admin.movies.store');
     Route::get('/movies/{movie}', [AdminMovieController::class, 'show'])->name('admin.movies.show');
 });

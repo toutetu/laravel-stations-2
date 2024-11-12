@@ -17,6 +17,14 @@
         th {
             background-color: #f2f2f2;
         }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -26,8 +34,16 @@
     <nav>
         <ul>
             <li><a href="{{ route('admin.movies.index') }}">映画一覧</a></li>
+            <li><a href="{{ route('admin.movies.create') }}">新規映画登録</a></li>
         </ul>
     </nav>
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <main>
         @yield('content')
     </main>

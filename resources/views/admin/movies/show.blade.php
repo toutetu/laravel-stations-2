@@ -20,8 +20,8 @@
             <td>{{ $movie->published_year }}</td>
         </tr>
         <tr>
-            <th>上映状況</th>
-            <td>{{ $movie->is_showing ? '上映中' : '上映予定' }}</td>
+            <th>公開中かどうか</th>
+            <td>{{ $movie->is_showing ? '公開中' : '公開予定' }}</td>
         </tr>
         <tr>
             <th>概要</th>
