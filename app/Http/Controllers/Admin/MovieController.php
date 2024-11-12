@@ -54,5 +54,28 @@ class MovieController extends Controller
         return redirect()->route('admin.movies.index')->with('success', '映画が正常に登録されました。');
     }
 
+    public function edit(Movie $movie)
+    {
+        return view('admin.movies.edit', compact('movie'));
+    }
+
+    public function update(Request $request, Movie $movie)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255', Rule::unique('movies')->ignore($movie->id)],
+            'image_url' => ['required', 'url'],
+            'release_year' => ['required', 'integer', 'min:1800', 'max:' . (date('Y') + 1)],
+            'description' => ['required', 'string'],
+            'is_showing' => ['required', 'boolean'],
+        ]);
+
+        $movie->update($validated);
+
+        return redirect()->route('admin.movies.index')->with('success', '映画情報が更新されました。');
+    }
+
+
+
+
 
 }

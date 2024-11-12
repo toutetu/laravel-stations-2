@@ -14,6 +14,7 @@
                 <th>登録日時</th>
                 <th>更新日時</th>
                 <th>詳細</th>
+                <th>編集</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                     <td>{{ $movie->created_at }}</td>
                     <td>{{ $movie->updated_at }}</td>
                     <td><a href="{{ route('admin.movies.show', $movie) }}">詳細</a></td>
+                    <td><a href="{{ route('admin.movies.edit', $movie) }}" class="btn btn-sm btn-primary">編集</a></td>
                 </tr>
             @endforeach
         </tbody>
