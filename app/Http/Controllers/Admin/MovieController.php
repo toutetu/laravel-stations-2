@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Movie;
+use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UpdateMovieRequest;
@@ -55,25 +57,47 @@ class MovieController extends Controller
         return view('admin.movies.create');
     }
     
-    public function store(CreateMovieRequest $request)
-    {
-        
-        $movie = Movie::create($request->validated());
-        return redirect()->route('admin.movies.index')->with('success', '映画が正常に登録されました。');
-    }
-
     public function edit(Movie $movie)
     {
         return view('admin.movies.edit', compact('movie'));
     }
 
+    public function store(CreateMovieRequest $request)
+    {
+        try {
+            DB::transaction(function () use ($request) {
+                $genre = Genre::firstOrCreate(['name' => $request->genre]);
+                
+                $movie = new Movie($request->except('genre'));
+                $movie->genre()->associate($genre);
+                $movie->save();
+            });
+
+            return redirect()->route('admin.movies.index')->with('success', '映画が正常に登録されました。');
+        } catch (\Exception $e) {
+            // return redirect()->back()->with('error', '映画の登録に失敗しました: ' . $e->getMessage())->withInput();
+            return response()->json(['error' => '映画の登録に失敗しました: ' . $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
         \Log::info('Update method called', ['request' => $request->all(), 'movie' => $movie]);
 
-        $movie->update($request->validated());
-        return redirect()->route('admin.movies.index')->with('success', '映画情報が更新されました。');
+        try {
+            DB::transaction(function () use ($request, $movie) {
+                $genre = Genre::firstOrCreate(['name' => $request->genre]);
+                
+                $movie->fill($request->except('genre'));
+                $movie->genre()->associate($genre);
+                $movie->save();
+            });
+
+            return redirect()->route('admin.movies.index')->with('success', '映画情報が更新されました。');
+        } catch (\Exception $e) {
+            // return redirect()->back()->with('error', '映画情報の更新に失敗しました: ' . $e->getMessage())->withInput();
+            return response()->json(['error' => '映画情報の更新に失敗しました: ' . $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
 

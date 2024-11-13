@@ -24,6 +24,10 @@
             <td>{{ $movie->is_showing ? '公開中' : '公開予定' }}</td>
         </tr>
         <tr>
+            <th>ジャンル</th>
+            <td>{{ $movie->genre->name ?? 'N/A' }}</td>
+        </tr>
+        <tr>
             <th>概要</th>
             <td>{{ $movie->description }}</td>
         </tr>

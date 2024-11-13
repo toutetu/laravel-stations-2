@@ -51,6 +51,14 @@
             @enderror
         </div>
 
+        <div class="form-group">
+            <label for="genre">ジャンル:</label>
+            <input type="text" id="genre" name="genre" value="{{ old('genre') }}" required class="form-control" lang="ja" placeholder="例: アクション">
+            @error('genre')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+
         <div class="form-group checkbox-group">
             <input type="checkbox" id="is_showing" name="is_showing" value="1" {{ old('is_showing') ? 'checked' : '' }} class="form-checkbox">
             <label for="is_showing">公開中</label>

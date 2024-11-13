@@ -15,6 +15,7 @@ class Movie extends Model
         'published_year',
         'description',
         'is_showing',
+        'genre_id'
     ];
     protected $attributes = [
         'published_year' => null,
@@ -29,4 +30,9 @@ class Movie extends Model
 
     protected $table = 'movies';
     protected $dates = ['created_at', 'updated_at'];
+
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
 }

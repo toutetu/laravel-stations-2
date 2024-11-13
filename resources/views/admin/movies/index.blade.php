@@ -44,6 +44,7 @@
                 <th>画像URL</th>
                 <th>公開年</th>
                 <th>上映中</th>
+                <th>ジャンル</th>
                 <th>概要</th>
                 <th>登録日時</th>
                 <th>更新日時</th>
@@ -58,6 +59,7 @@
                     <td>{{ Str::limit($movie->image_url, 30) }}</td>
                     <td>{{ $movie->published_year }}</td>
                     <td>{{ $movie->is_showing ? '上映中' : '上映予定' }}</td>
+                    <td>{{ $movie->genre->name ?? 'N/A' }}</td>
                     <td>{{ Str::limit($movie->description, 50) }}</td>
                     <td>{{ $movie->created_at ? $movie->created_at->format('Y-m-d H:i:s') : 'N/A' }}</td>
                     <td>{{ $movie->updated_at ? $movie->updated_at->format('Y-m-d H:i:s') : 'N/A' }}</td>

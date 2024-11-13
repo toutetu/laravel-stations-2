@@ -27,6 +27,11 @@
             <textarea class="form-control" id="description" name="description" rows="3" required>{{ old('description', $movie->description) }}</textarea>
         </div>
 
+        <div class="mb-3">
+            <label for="genre" class="form-label">ジャンル</label>
+            <input type="text" class="form-control" id="genre" name="genre" value="{{ old('genre', $movie->genre->name ?? '') }}" required>
+        </div>
+
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="is_showing" name="is_showing" value="1" {{ old('is_showing', $movie->is_showing) ? 'checked' : '' }}>
             <label class="form-check-label" for="is_showing">上映中</label>
