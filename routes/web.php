@@ -35,6 +35,7 @@ Route::prefix('admin')->group(function () {
     
     Route::patch('/movies/{movie}/update', [AdminMovieController::class, 'update'])->name('admin.movies.update');
     Route::get('/movies/{movie}/edit', [AdminMovieController::class, 'edit'])->name('admin.movies.edit');
-    // Route::patch('/movies/{movie}', [AdminMovieController::class, 'update'])->name('admin.movies.update');
+
+    Route::delete('/movies/{movie}/destroy', [AdminMovieController::class, 'destroy'])->name('admin.movies.destroy');
     
 });

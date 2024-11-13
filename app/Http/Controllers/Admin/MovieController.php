@@ -97,4 +97,10 @@ class MovieController extends Controller
         return redirect()->route('admin.movies.index')->with('success', '映画情報が更新されました。');
     }
 
+
+    public function destroy(Movie $movie)
+    {
+        $movie->delete();
+        return redirect()->route('admin.movies.index')->with('success', '映画情報が削除されました。');
+    }
 }

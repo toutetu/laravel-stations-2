@@ -26,6 +26,7 @@
             margin-right: 10px;
         }
     </style>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 <body>
     <header>

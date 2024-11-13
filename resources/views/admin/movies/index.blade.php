@@ -26,6 +26,7 @@
                         <th>更新日時</th>
                         <th>詳細</th>
                         <th>編集</th>
+                        <th>削除</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,6 +42,13 @@
                             <td>{{ $movie->updated_at }}</td>
                             <td><a href="{{ route('admin.movies.show', $movie) }}">詳細</a></td>
                             <td><a href="{{ route('admin.movies.edit', $movie) }}" class="btn btn-sm btn-primary">編集</a></td>
+                            <td>
+                                <form action="{{ route('admin.movies.destroy', $movie) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm delete-movie" data-movie-title="{{ $movie->title }}">削除</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
