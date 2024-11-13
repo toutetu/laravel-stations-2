@@ -20,10 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
-
-Route::get('/movies', [MovieController::class, 'index']);
+Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
 
 
 Route::prefix('admin')->group(function () {

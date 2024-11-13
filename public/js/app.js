@@ -2072,6 +2072,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+document.addEventListener('DOMContentLoaded', function (event) {
+  var form = document.querySelector('form');
+  var radios = form.querySelectorAll('input[type="radio"]');
+  radios.forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      form.submit();
+    });
+  });
+});
 
 /***/ }),
 

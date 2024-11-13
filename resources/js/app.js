@@ -11,3 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const form = document.querySelector('form');
+    const radios = form.querySelectorAll('input[type="radio"]');
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            form.submit();
+        });
+    });
+});

@@ -23,7 +23,10 @@ class Movie extends Model
     ];
     protected $casts = [
         'is_showing' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     protected $table = 'movies';
+    protected $dates = ['created_at', 'updated_at'];
 }
