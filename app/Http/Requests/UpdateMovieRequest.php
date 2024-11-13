@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+// use App\Http\Requests\UpdateMovieRequest;
 
 class UpdateMovieRequest extends FormRequest
 {
@@ -30,7 +31,7 @@ class UpdateMovieRequest extends FormRequest
             'published_year' => ['required', 'gte:1900'],
             'description' => ['required'],
             'is_showing' => ['required', 'boolean'],
-            'genre' => ['required'],
+            // 'genre' => ['required'],
         ];
     }
 }

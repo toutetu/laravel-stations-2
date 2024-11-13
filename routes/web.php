@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\Admin\MovieController as AdminMovieController;
-// use App\Http\Controllers\Admin\MovieController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +32,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/movies/store', [AdminMovieController::class, 'store'])->name('admin.movies.store');
     
     Route::get('/movies/{movie}', [AdminMovieController::class, 'show'])->name('admin.movies.show');
-
+    
+    Route::patch('/movies/{movie}/update', [AdminMovieController::class, 'update'])->name('admin.movies.update');
     Route::get('/movies/{movie}/edit', [AdminMovieController::class, 'edit'])->name('admin.movies.edit');
-    Route::patch('/movies/{movie}', [AdminMovieController::class, 'update'])->name('admin.movies.update');
+    // Route::patch('/movies/{movie}', [AdminMovieController::class, 'update'])->name('admin.movies.update');
     
 });

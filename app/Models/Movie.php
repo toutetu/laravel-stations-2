@@ -24,4 +24,6 @@ class Movie extends Model
     protected $casts = [
         'is_showing' => 'boolean',
     ];
+
+    protected $table = 'movies';
 }

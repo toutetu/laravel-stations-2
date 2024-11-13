@@ -1,14 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
     <h1>映画情報の編集</h1>
     <form action="{{ route('admin.movies.update', $movie) }}" method="POST">
         @csrf
-        @method('PATCH')
+        @method('patch')
         
         <div class="mb-3">
-            <label for="title" class="form-label">タイトル</label>
+            <label for="title"   class="form-label">タイトル</label>
             <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $movie->title) }}" required>
         </div>
 
@@ -18,8 +18,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="release_year" class="form-label">公開年</label>
-            <input type="number" class="form-control" id="release_year" name="release_year" value="{{ old('release_year', $movie->release_year) }}" required>
+            <label for="published_year" class="form-label">公開年</label>
+            <input type="number" class="form-control" id="published_year" name="published_year" value="{{ old('published_year', $movie->published_year) }}" required>
         </div>
 
         <div class="mb-3">
