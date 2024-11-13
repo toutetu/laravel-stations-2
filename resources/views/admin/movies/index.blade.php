@@ -56,7 +56,8 @@
                 <tr>
                     <td>{{ $movie->id }}</td>
                     <td>{{ $movie->title }}</td>
-                    <td>{{ Str::limit($movie->image_url, 30) }}</td>
+                    <!-- <td>{{ Str::limit($movie->image_url, 30) }}</td> -->
+                    <td>{{ Str::limit($movie->image_url) }}</td>
                     <td>{{ $movie->published_year }}</td>
                     <td>{{ $movie->is_showing ? '上映中' : '上映予定' }}</td>
                     <td>{{ $movie->genre->name ?? 'N/A' }}</td>
