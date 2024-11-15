@@ -24,6 +24,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        try {
+            \DB::connection()->getPDO();
+            \Log::info('Database connected: ' . \DB::connection()->getDatabaseName());
+        } catch (\Exception $e) {
+            \Log::error('Database connection failed: ' . $e->getMessage());
+        }
+        
         // Paginator::defaultView('layouts.pagination.paginator');
         Paginator::useBootstrap();
     }

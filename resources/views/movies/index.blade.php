@@ -18,6 +18,14 @@
             max-width: 100%;
             height: auto;
         }
+        /* 追加: リンクのスタイル */
+                .movie-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .movie-link:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
@@ -51,12 +59,16 @@
 
         <div class="movie-grid">
             @foreach($movies as $movie)
-                <div class="movie-item">
-                    <img src="{{ $movie->image_url }}" alt="{{ $movie->title }}">
-                    <h3>{{ $movie->title }}</h3>
-                </div>
+                <!-- 変更: 各映画アイテムをリンクで囲む -->
+                <a href="{{ route('movies.show', $movie->id) }}" class="movie-link">
+                    <div class="movie-item">
+                        <img src="{{ $movie->image_url }}" alt="{{ $movie->title }}">
+                        <h3>{{ $movie->title }}</h3>
+                    </div>
+                </a>
             @endforeach
         </div>
+
 
         <div class="d-flex justify-content-center mt-4">
             {{ $movies->appends(request()->query())->links() }}

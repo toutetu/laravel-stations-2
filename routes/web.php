@@ -25,6 +25,8 @@ Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
 
 Route::get('/sheets', [SheetController::class, 'index']);
 
+Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show');
+
 Route::prefix('admin')->group(function () {
     Route::get('/movies', [AdminMovieController::class, 'index'])->name('admin.movies.index');
     Route::get('/movies/create', [AdminMovieController::class, 'create'])->name('admin.movies.create');
@@ -37,4 +39,9 @@ Route::prefix('admin')->group(function () {
 
     Route::delete('/movies/{movie}/destroy', [AdminMovieController::class, 'destroy'])->name('admin.movies.destroy');
     
+});
+
+Route::get('/check-schedules', function () {
+    $schedules = DB::table('schedules')->get();
+    return response()->json($schedules);
 });
