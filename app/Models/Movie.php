@@ -40,4 +40,5 @@ class Movie extends Model
     {
         return $this->hasMany(Schedule::class)->orderBy('start_time', 'asc');
     }
+ 
 }

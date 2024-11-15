@@ -5,6 +5,7 @@ use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\Admin\MovieController as AdminMovieController;
 use App\Http\Controllers\SheetController;
+use App\Http\Controllers\Admin\ScheduleController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,16 @@ Route::prefix('admin')->group(function () {
     Route::get('/movies/{movie}/edit', [AdminMovieController::class, 'edit'])->name('admin.movies.edit');
 
     Route::delete('/movies/{movie}/destroy', [AdminMovieController::class, 'destroy'])->name('admin.movies.destroy');
+
+    
+
+    Route::get('/schedules', [ScheduleController::class, 'index'])->name('admin.schedules.index');
+    Route::get('/schedules/{id}', [ScheduleController::class, 'show'])->name('admin.schedules.show');
+    Route::get('/movies/{id}/schedules/create', [ScheduleController::class, 'create'])->name('admin.schedules.create');
+    Route::post('/movies/{id}/schedules/store', [ScheduleController::class, 'store'])->name('admin.schedules.store');
+    Route::get('/schedules/{id}/edit', [ScheduleController::class, 'edit'])->name('admin.schedules.edit');
+    Route::patch('/schedules/{id}/update', [ScheduleController::class, 'update'])->name('admin.schedules.update');
+    Route::delete('/schedules/{id}/destroy', [ScheduleController::class, 'destroy'])->name('admin.schedules.destroy');
     
 });
 

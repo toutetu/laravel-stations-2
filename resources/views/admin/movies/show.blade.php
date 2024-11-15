@@ -21,7 +21,7 @@
         </tr>
         <tr>
             <th>公開中かどうか</th>
-            <td>{{ $movie->is_showing ? '公開中' : '公開予定' }}</td>
+            <td>{{ $movie->is_showing ? '上映中' : '上映予定' }}</td>
         </tr>
         <tr>
             <th>ジャンル</th>
@@ -40,5 +40,16 @@
             <td>{{ $movie->updated_at }}</td>
         </tr>
     </table>
+    <h2>スケジュール</h2>
+        <a href="{{ route('admin.schedules.create', $movie->id) }}">新規スケジュール作成</a>
+        <ul>
+            @foreach($movie->schedules as $schedule)
+                <li>
+                    <a href="{{ route('admin.schedules.show', $schedule->id) }}">
+                        開始時刻: {{ $schedule->start_time }} - 終了時刻: {{ $schedule->end_time }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
     <a href="{{ route('admin.movies.index') }}">一覧に戻る</a>
 @endsection

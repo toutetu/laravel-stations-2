@@ -37,6 +37,7 @@
         <ul>
             <li><a href="{{ route('admin.movies.index') }}">映画一覧</a></li>
             <li><a href="{{ route('admin.movies.create') }}">新規映画登録</a></li>
+            <li><a href="{{ route('admin.schedules.index') }}">スケジュール一覧</a></li>
         </ul>
     </nav>
 
