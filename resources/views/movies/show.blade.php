@@ -37,6 +37,7 @@
                 <tr>
                     <th>開始時間</th>
                     <th>終了時間</th>
+                    <th>予約</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,8 +45,12 @@
                     <tr>
                     <td>{{ $schedule->start_time instanceof \DateTime ? $schedule->start_time->format('Y-m-d H:i') : $schedule->start_time }}</td>
                     <td>{{ $schedule->end_time instanceof \DateTime ? $schedule->end_time->format('Y-m-d H:i') : $schedule->end_time }}</td>
+                    <td><a href="{{ route('movies.schedules.sheets', ['movie_id' => $movie->id, 'schedule_id' => $schedule->id, 'date' => date('Y-m-d')]) }}">
+                    座席を予約する
+                    </a></td>
                     </tr>
                 @endforeach
+                
             </tbody>
         </table>
     @else
