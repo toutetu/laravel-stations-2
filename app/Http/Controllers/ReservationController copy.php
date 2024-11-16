@@ -28,6 +28,65 @@ class ReservationController extends Controller
         return view('reservations.seats', compact('movie', 'schedule', 'date', 'sheets', 'reservedSheets'));
     }
     
+    // public function create($movie_id, $schedule_id, Request $request)
+    // {
+    //     $date = $request->query('date');
+    //     $sheetId = $request->query('sheetId');
+    //     if (!$date || !$sheetId) {
+    //         return redirect()->route('movies.schedules.sheets', [
+    //             'movie_id' => $movie_id,
+    //             'schedule_id' => $schedule_id,
+    //             'date' => $date
+    //         ])->with('error', 'Date and sheetId are required');
+    //     }
+    
+    //     // 既存の予約をチェック
+    //     $existingReservation = Reservation::where('schedule_id', $schedule_id)
+    //         ->where('sheet_id', $sheetId)
+    //         ->where('date', $date)
+    //         ->first();
+    
+    //     if ($existingReservation) {
+    //         return redirect()->route('movies.schedules.sheets', [
+    //             'movie_id' => $movie_id,
+    //             'schedule_id' => $schedule_id,
+    //             'date' => $date
+    //         ])->with('error', 'その座席はすでに予約済みです');
+    //     }
+    
+    //     $movie = Movie::findOrFail($movie_id);
+    //     $schedule = Schedule::findOrFail($schedule_id);
+        
+    //     return view('reservations.create', compact('movie', 'schedule', 'date', 'sheetId'));
+    // }
+
+    // public function create($movie_id, $schedule_id, Request $request)
+    // {
+    //     $date = $request->query('date');
+    //     $sheetId = $request->query('sheetId');
+    //     if (!$date || !$sheetId) {
+    //         return response()->json(['error' => 'Date and sheetId are required'], 400);
+    //     }
+
+    //     // 日付をYYYY-MM-DD形式に正規化
+    //     $normalizedDate = date('Y-m-d', strtotime($date));
+
+    //     // 既存の予約をチェック
+    //     $existingReservation = Reservation::where('schedule_id', $schedule_id)
+    //         ->where('sheet_id', $sheetId)
+    //         ->whereDate('date', $normalizedDate)
+    //         ->first();
+
+    //     if ($existingReservation) {
+    //         return response()->json(['error' => 'This seat is already reserved for the selected date and time'], 400);
+    //     }
+
+    //     $movie = Movie::findOrFail($movie_id);
+    //     $schedule = Schedule::findOrFail($schedule_id);
+        
+    //     return view('reservations.create', compact('movie', 'schedule', 'date', 'sheetId'));
+    // }
+
     public function create($movie_id, $schedule_id, Request $request)
     {
         $date = $request->query('date');
