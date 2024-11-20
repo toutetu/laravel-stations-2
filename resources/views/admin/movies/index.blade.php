@@ -3,6 +3,11 @@
 @section('content')
 
 <h1>映画一覧</h1>
+@if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+@endif
 
 @if(isset($dbStatus))
     <div class="alert alert-info">

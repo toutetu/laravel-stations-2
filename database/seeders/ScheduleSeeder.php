@@ -3,28 +3,29 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Schedule;
 use App\Models\Movie;
+use App\Models\Schedule;
 use Carbon\Carbon;
 
 class ScheduleSeeder extends Seeder
 {
     public function run(): void
     {
-        $movies = Movie::take(2)->get();
+        $movies = Movie::all();
 
-        foreach ($movies as $index => $movie) {
-            Schedule::create([
-                'movie_id' => $movie->id,
-                'start_time' => Carbon::today()->setTime(10 + $index * 4, 0),
-                'end_time' => Carbon::today()->setTime(12 + $index * 4, 0),
-            ]);
+        foreach ($movies as $movie) {
+            $numberOfSchedules = rand(2, 3); // 各映画に対して2〜3のスケジュールを作成
 
-            Schedule::create([
-                'movie_id' => $movie->id,
-                'start_time' => Carbon::today()->setTime(14 + $index * 4, 0),
-                'end_time' => Carbon::today()->setTime(16 + $index * 4, 0),
-            ]);
+            for ($i = 0; $i < $numberOfSchedules; $i++) {
+                $startTime = Carbon::today()->addDays(rand(0, 14))->setHour(rand(10, 20))->setMinute(0);
+                $endTime = $startTime->copy()->addHours(2);
+
+                Schedule::factory()->create([
+                    'movie_id' => $movie->id,
+                    'start_time' => $startTime,
+                    'end_time' => $endTime,
+                ]);
+            }
         }
     }
 }

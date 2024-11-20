@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+use App\Http\Controllers\Api\ScheduleController;
+use App\Http\Controllers\Api\SeatController;
+
+Route::get('/schedules/{movieId}', [ScheduleController::class, 'getSchedulesByMovie']);
+Route::get('/seats/{scheduleId}/{date}', [SeatController::class, 'getSeatsByScheduleAndDate']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/schedules/{movieId}', [ScheduleController::class, 'getSchedulesByMovie']);
+    Route::get('/seats/{scheduleId}/{date}', [SeatController::class, 'getSeatsByScheduleAndDate']);
+});

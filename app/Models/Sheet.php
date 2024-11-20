@@ -13,6 +13,6 @@ class Sheet extends Model
 
     public function getNumberAttribute()
     {
-        return $this->row . $this->column;
+        return strtoupper($this->row . $this->column);
     }
 }

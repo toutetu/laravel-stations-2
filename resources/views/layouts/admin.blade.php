@@ -35,17 +35,19 @@
     </header>
     <nav>
         <ul>
+            <li><a href="{{ route('movies.index') }}">利用者画面</a></li>
             <li><a href="{{ route('admin.movies.index') }}">映画一覧</a></li>
             <li><a href="{{ route('admin.movies.create') }}">新規映画登録</a></li>
             <li><a href="{{ route('admin.schedules.index') }}">スケジュール一覧</a></li>
+            <li><a href="{{ route('admin.reservations.index') }}">予約一覧</a></li>
         </ul>
     </nav>
 
-    @if (session('success'))
+    <!-- @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
-    @endif
+    @endif -->
 
     <main>
         @yield('content')
