@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card mt-4">
-        <div class="card-header">
-            <h2>座席表</h2>
+<h2>座席を選んでください</h2>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-        <div class="card-body">
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
             <p><strong>映画:</strong> {{ $movie->title }}</p>
             <p><strong>日付:</strong> {{ $date }}</p>
             <p><strong>時間:</strong> {{ $schedule->start_time }}</p>
+
+    <div class="card mt-4">
+        <!-- <div class="card-header">        </div> -->
+        <div class="card-body">
 
             <div class="seats-container">
                 <div class="screen">スクリーン</div>
