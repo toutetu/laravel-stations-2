@@ -12,7 +12,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;
-use Carbon\Carbon;
 
 class AdminReservationTest extends TestCase
 {
@@ -63,35 +62,30 @@ class AdminReservationTest extends TestCase
     public function test管理者予約一覧で上映終了の映画が非表示となっているか(): void
     {
         $count = 12;
-        $futureDate = Carbon::now()->addDays(30)->format('Y-m-d');
-        $pastDate = Carbon::now()->subDays(30)->format('Y-m-d');
-    
-   
-        // 過去の予約（表示されないべき）
-        for ($i = $count / 2; $i < $count; $i++) {
-            $movieId = $this->createMovie('過去の映画' . $i)->id;
+        for ($i = 0; $i < $count; $i++) {
+            $movieId = $this->createMovie('タイトル' . $i)->id;
             Reservation::insert([
-                'date' => $pastDate,
+                'date' => new CarbonImmutable('2020-01-01'),
                 'schedule_id' => Schedule::insertGetId([
                     'movie_id' => $movieId,
-                    'start_time' => Carbon::parse($pastDate . ' 12:00:00'),
-                    'end_time' => Carbon::parse($pastDate . ' 14:00:00'),
+                    'start_time' => new CarbonImmutable('2020-01-01 00:00:00'),
+                    'end_time' => new CarbonImmutable('2020-01-01 02:00:00'),
                 ]),
-                'sheet_id' => $i + 16,
-                'email' => 'past@example.com',
-                'name' => '過去太郎',
+                'sheet_id' => $i + 1,
+                'email' => 'sample@exmaple.com',
+                'name' => 'サンプル太郎',
             ]);
         }
-    
         $response = $this->get('/admin/reservations/');
         $response->assertStatus(200);
-    
-  
-        // 過去の予約が表示されていないことを確認
-        $response->assertDontSee('過去の映画');
-        $response->assertDontSee('過去太郎');
-        $response->assertDontSee('past@example.com');
-        $response->assertDontSee($pastDate);
+
+        $reservations = Reservation::all();
+        foreach ($reservations as $reservation) {
+            $response->assertDontSee($reservation->date);
+            $response->assertDontSee($reservation->name);
+            $response->assertDontSee($reservation->email);
+            $response->assertDontSee(strtoupper($reservation->sheet->row . $reservation->sheet->column));
+        }
     }
 
     #[Test]
@@ -106,7 +100,6 @@ class AdminReservationTest extends TestCase
     #[Group('station19')]
     public function test管理者予約作成画面で予約が作成されるか(): void
     {
-        $this->artisan('db:wipe'); //データベースをクリーンアップ
         $this->assertReservationCount(0);
         $movieId = $this->createMovie('タイトル')->id;
         $scheduleId = $this->createSchedule($movieId)->id;
@@ -120,12 +113,6 @@ class AdminReservationTest extends TestCase
         ]);
         $response->assertStatus(302);
         $this->assertReservationCount(1);
-    }
-
-    private function assertReservationCount(int $count): void
-    {
-        $reservationCount = Reservation::count();
-        $this->assertEquals($reservationCount, $count);
     }
 
     #[Test]
@@ -145,6 +132,11 @@ class AdminReservationTest extends TestCase
         $this->assertReservationCount(0);
     }
 
+    private function assertReservationCount(int $count): void
+    {
+        $reservationCount = Reservation::count();
+        $this->assertEquals($reservationCount, $count);
+    }
 
     #[Test]
     #[Group('station19')]
