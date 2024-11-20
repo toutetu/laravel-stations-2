@@ -48,8 +48,9 @@ class ReservationController extends Controller
 
         $movie = Movie::findOrFail($movie_id);
         $schedule = Schedule::findOrFail($schedule_id);
+        $sheet = Sheet::findOrFail($sheetId);  // シートの情報を取得
         
-        return view('reservations.create', compact('movie', 'schedule', 'date', 'sheetId'));
+        return view('reservations.create', compact('movie', 'schedule', 'date', 'sheetId', 'sheet'));
     }
     
     public function store(Request $request)

@@ -32,16 +32,19 @@
             @foreach ($reservations as $reservation)
                 <tr>
                     <td>{{ $reservation->schedule->movie->title }}</td>
-                    <!-- <td>{{ strtoupper($reservation->sheet->row . $reservation->sheet->column) }}</td> -->
                     <td>{{ strtoupper($reservation->sheet->number) }}</td>
-                    <td>{{ $reservation->date }} {{ $reservation->schedule->start_time }}</td>
+                    <td>{{ $reservation->schedule->start_time }}</td>
                     <td>{{ $reservation->name }}</td>
                     <td>{{ $reservation->email }}</td>
                     <td>
-                    <a href="{{ route('admin.reservations.show', $reservation->id) }}" class="btn btn-sm btn-info">詳細・編集</a>
+                        <a href="{{ route('admin.reservations.show', $reservation->id) }}" class="btn btn-sm btn-info">詳細・編集・削除</a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <div class="d-flex justify-content-center">
+        {{ $reservations->links() }}
+    </div>
 @endsection

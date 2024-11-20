@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Models\Sheet;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class ReservationController extends Controller
@@ -20,7 +21,7 @@ class ReservationController extends Controller
                 $query->where('end_time', '>', Carbon::now());
             })
             ->orderBy('date')
-            ->get();
+            ->paginate(10);  // 1ページあたり20件表示
     
         return view('admin.reservations.index', compact('reservations'));
     }
