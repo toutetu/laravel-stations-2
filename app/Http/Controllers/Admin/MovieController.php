@@ -40,8 +40,9 @@ class MovieController extends Controller
             $dbStatus .= " | Movies count: " . $movies->total();
         } catch (\Exception $e) {
             $dbStatus = "Could not connect to the database. Error: " . $e->getMessage();
-            $movies = new LengthAwarePaginator([], 0, 20); // 空のページネーションを作成
+            $movies = collect()->paginate(20); // 空のコレクションをページネーション
         }
+        
         return view('admin.movies.index', compact('movies', 'dbStatus'));
     }
 
