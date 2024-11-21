@@ -21,6 +21,9 @@
                         <a class="nav-link" href="{{ route('movies.index') }}">映画一覧</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('sheets') }}">座席表</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.movies.index') }}">管理画面</a>
                     </li>
                 </ul>

@@ -27,7 +27,7 @@ Route::get('/', function () {
 
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
 
-Route::get('/sheets', [SheetController::class, 'index']);
+Route::get('/sheets', [SheetController::class, 'index'])->name('sheets');
 
 
 Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show');
