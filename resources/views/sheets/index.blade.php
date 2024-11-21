@@ -13,7 +13,7 @@
                 <div class="seat-row">
                     @foreach ($rowSheets as $sheet)
                         <div class="seat available">
-                            <span>{{ $sheet->row }}{{ $sheet->column }}</span>
+                            <span>{{ $sheet->row }}-{{ $sheet->column }}</span>
                         </div>
                     @endforeach
                 </div>
