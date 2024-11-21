@@ -41,7 +41,7 @@
         </tr>
     </table>
     <h2>スケジュール</h2>
-        <a href="{{ route('admin.schedules.create', $movie->id) }}">新規スケジュール作成</a>
+        <a href="{{ route('admin.schedules.create', $movie->id) }}" class="btn btn-primary">新規スケジュール作成</a>
         <ul>
             @foreach($movie->schedules as $schedule)
                 <li>
@@ -51,5 +51,5 @@
                 </li>
             @endforeach
         </ul>
-    <a href="{{ route('admin.movies.index') }}">一覧に戻る</a>
+    <a href="{{ route('admin.movies.index') }}" class="btn btn-primary">戻る</a>
 @endsection

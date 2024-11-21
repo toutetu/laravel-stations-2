@@ -27,15 +27,15 @@ class ScheduleController extends Controller
         return view('admin.schedules.show', compact('schedule'));
     }
 
-    public function create($movieId)
+    public function create($id)
     {
-        $movie = Movie::findOrFail($movieId);
+        $movie = Movie::findOrFail($id);
         return view('admin.schedules.create', compact('movie'));
     }
     
-    public function store(Request $request, $movieId)
+    public function store(Request $request, $id)
     {
-        $validatedData = $this->validateAndProcessScheduleData($request, $movieId);
+        $validatedData = $this->validateAndProcessScheduleData($request, $id);
     
         if ($validatedData instanceof \Illuminate\Http\RedirectResponse) {
             return $validatedData;
