@@ -2,7 +2,11 @@
 
 @section('content')
     <h1>予約一覧</h1>
-
+    @if(isset($dbStatus))
+    <div class="alert alert-info">
+        {{ $dbStatus }}
+    </div>
+    @endif
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
