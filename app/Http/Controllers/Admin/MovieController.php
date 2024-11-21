@@ -75,15 +75,14 @@ class MovieController extends Controller
 
             return redirect()->route('admin.movies.index')->with('success', '映画が正常に登録されました。');
         } catch (\Exception $e) {
-            // return redirect()->back()->with('error', '映画の登録に失敗しました: ' . $e->getMessage())->withInput();
-            return response()->json(['error' => '映画の登録に失敗しました: ' . $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return redirect()->back()->with('error', '映画の登録に失敗しました: ' . $e->getMessage())->withInput();
+            // return response()->json(['error' => '映画の登録に失敗しました: ' . $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
         \Log::info('Update method called', ['request' => $request->all(), 'movie' => $movie]);
-
         try {
             DB::transaction(function () use ($request, $movie) {
                 $genre = Genre::firstOrCreate(['name' => $request->genre]);
@@ -92,14 +91,12 @@ class MovieController extends Controller
                 $movie->genre()->associate($genre);
                 $movie->save();
             });
-
+    
             return redirect()->route('admin.movies.index')->with('success', '映画情報が更新されました。');
         } catch (\Exception $e) {
-            // return redirect()->back()->with('error', '映画情報の更新に失敗しました: ' . $e->getMessage())->withInput();
-            return response()->json(['error' => '映画情報の更新に失敗しました: ' . $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return redirect()->back()->with('error', '映画情報の更新に失敗しました: ' . $e->getMessage())->withInput();
         }
     }
-
 
     public function destroy(Movie $movie)
     {

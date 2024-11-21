@@ -43,7 +43,7 @@ class ScheduleController extends Controller
     
         Schedule::create($validatedData);
     
-        return redirect()->route('admin.schedules.index')->with('success', 'スケジュールが作成されました。');
+        return redirect()->route('admin.movies.show', ['movie' => $movieId])->with('success', 'スケジュールが作成されました。');
     }
 
     public function update(Request $request, $id)

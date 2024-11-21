@@ -13,7 +13,7 @@
     <form action="{{ route('admin.movies.store') }}" method="POST" class="movie-form">
         @csrf
         <div class="form-group">
-            <label for="title">映画タイトル:</label>
+            <label for="title">映画タイトル</label>
             <input type="text" id="title" name="title" value="{{ old('title') }}" required class="form-control" lang="ja" placeholder="例: となりのトトロ" autofocus>
             @error('title')
                 <div class="error-message">{{ $message }}</div>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-group">
-            <label for="image_url">画像URL:</label>
+            <label for="image_url">画像URL</label>
             <input type="url" id="image_url" name="image_url" value="{{ old('image_url') }}" required class="form-control">
             @error('image_url')
                 <div class="error-message">{{ $message }}</div>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="form-group">
-            <label for="published_year">公開年:</label>
+            <label for="published_year">公開年</label>
             <select id="published_year" name="published_year" class="form-control">
                 <option value="">選択してください</option>
                 @for ($year = 2024; $year >= 1950; $year--)
@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group">
-            <label for="description">概要:</label>
+            <label for="description">概要</label>
             <textarea id="description" name="description" class="form-control" lang="ja" placeholder="映画の概要を入力してください">{{ old('description') }}</textarea>
             @error('description')
                 <div class="error-message">{{ $message }}</div>
@@ -52,7 +52,7 @@
         </div>
 
         <div class="form-group">
-            <label for="genre">ジャンル:</label>
+            <label for="genre">ジャンル</label>
             <input type="text" id="genre" name="genre" value="{{ old('genre') }}" required class="form-control" lang="ja" placeholder="例: アクション">
             @error('genre')
                 <div class="error-message">{{ $message }}</div>
@@ -61,7 +61,7 @@
 
         <div class="form-group checkbox-group">
             <input type="checkbox" id="is_showing" name="is_showing" value="1" {{ old('is_showing') ? 'checked' : '' }} class="form-checkbox">
-            <label for="is_showing">公開中</label>
+            <label for="is_showing">上映中</label>
             @error('is_showing')
                 <div class="error-message">{{ $message }}</div>
             @enderror

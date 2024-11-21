@@ -35,13 +35,15 @@ Route::get('/sheets', [SheetController::class, 'index'])->name('sheets');
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resources([
         'movies' => AdminMovieController::class,
-        'schedules' => ScheduleController::class,
         'reservations' => AdminReservationController::class,
     ]);
 
     // Custom routes for schedules
-    Route::get('movies/schedules/create', [ScheduleController::class, 'create'])->name('schedules.create');
-    Route::post('movies/{id}/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
+    Route::get('movies/{movie}/schedules/create', [ScheduleController::class, 'create'])->name('schedules.create');
+    Route::post('movies/{movie}/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
+    
+    // Other schedule routes if needed
+    Route::resource('schedules', ScheduleController::class)->except(['create', 'store']);
 });
 
 // Debug route

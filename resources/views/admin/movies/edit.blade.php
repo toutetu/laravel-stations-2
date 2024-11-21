@@ -3,9 +3,18 @@
 @section('content')
 <div class="container">
     <h1>映画情報の編集</h1>
-    <form action="{{ route('admin.movies.update', $movie) }}" method="POST">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <form action="{{ route('admin.schedules.store', ['movie' => $movie->id]) }}" method="POST">
         @csrf
-        @method('patch')
+        @method('PATCH')
         
         <div class="mb-3">
             <label for="title"   class="form-label">タイトル</label>
@@ -33,6 +42,7 @@
         </div>
 
         <div class="mb-3 form-check">
+            <input type="hidden" name="is_showing" value="0">
             <input type="checkbox" class="form-check-input" id="is_showing" name="is_showing" value="1" {{ old('is_showing', $movie->is_showing) ? 'checked' : '' }}>
             <label class="form-check-label" for="is_showing">上映中</label>
         </div>

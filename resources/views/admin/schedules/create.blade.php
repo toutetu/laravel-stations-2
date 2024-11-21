@@ -2,10 +2,20 @@
 
 @section('content')
     <h1>新規スケジュール作成</h1>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <h2>作品: {{ $movie->title }}</h2>
 
-    <form action="{{ route('admin.schedules.store', $movie->id) }}" method="POST">
+    <form action="{{ route('admin.schedules.store', ['movie' => $movie->id]) }}" method="POST">
         @csrf
+        <input type="hidden" name="movie_id" value="{{ $movie->id }}">
         <div>
             <label for="start_time_date">開始日付:</label>
             <input type="date" name="start_time_date" required>
