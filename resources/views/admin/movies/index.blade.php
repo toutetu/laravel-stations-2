@@ -71,8 +71,8 @@
                     <td>{{ $movie->created_at ? $movie->created_at->format('Y-m-d H:i:s') : 'N/A' }}</td>
                     <td>{{ $movie->updated_at ? $movie->updated_at->format('Y-m-d H:i:s') : 'N/A' }}</td>
                     <td>
-                        <a href="{{ route('admin.movies.show', $movie) }}" class="btn btn-sm btn-info">詳細</a>
-                        <a href="{{ route('admin.movies.edit', $movie) }}" class="btn btn-sm btn-primary">編集</a>
+                        <a href="{{ route('admin.movies.show', $movie) }}" class="btn btn-sm btn-info">詳細</a><br>
+                        <a href="{{ route('admin.movies.edit', $movie) }}" class="btn btn-sm btn-primary">編集</a><br>
                         <form action="{{ route('admin.movies.destroy', $movie) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
