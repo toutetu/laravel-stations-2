@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             MovieSeeder::class,
             ScheduleSeeder::class,
             SheetSeeder::class,
-            // ReservationSeeder::class,
+            ReservationSeeder::class,
         ]);
     }
 }
