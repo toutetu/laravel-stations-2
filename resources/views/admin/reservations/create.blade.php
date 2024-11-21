@@ -36,6 +36,13 @@
             @enderror
         </div>
         <div class="form-group">
+            <label for="date">日付</label>
+            <input type="date" name="date" id="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}" required>
+            @error('date')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-group">
             <label for="schedule_id">スケジュール</label>
             <select name="schedule_id" id="schedule_id" class="form-control @error('schedule_id') is-invalid @enderror" required>
                 <option value="">選択してください</option>
@@ -60,13 +67,6 @@
                 @endforeach
             </select>
             @error('sheet_id')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="form-group">
-            <label for="date">日付</label>
-            <input type="date" name="date" id="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}" required>
-            @error('date')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
