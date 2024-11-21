@@ -16,11 +16,11 @@ class ReservationSeeder extends Seeder
         $faker = Faker::create();
 
         // 既存のスケジュールをランダムに取得
-        $schedules = Schedule::inRandomOrder()->take(5)->get();
+        $schedules = Schedule::inRandomOrder()->take(10)->get();
 
         foreach ($schedules as $schedule) {
             // 各スケジュールに対して1〜3件の予約を作成
-            $numberOfReservations = rand(1, 3);
+            $numberOfReservations = rand(3, 5);
 
             for ($i = 0; $i < $numberOfReservations; $i++) {
                 // 利用可能なシートをランダムに取得
