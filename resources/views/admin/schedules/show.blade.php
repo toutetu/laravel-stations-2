@@ -1,19 +1,42 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>スケジュール詳細</h1>
-    <p>作品ID: {{ $schedule->movie_id }}</p>
-    <p>作品名: {{ $schedule->movie->title }}</p>
-    <p>開始時刻: {{ $schedule->start_time }}</p>
-    <p>終了時刻: {{ $schedule->end_time }}</p>
-    <p>作成日時: {{ $schedule->created_at }}</p>
-    <p>更新日時: {{ $schedule->updated_at }}</p>
+<div class="container mt-4">
+    <h1 class="mb-4">スケジュール詳細</h1>
+    <div class="bg-light p-4 rounded">
+        <dl class="row">
+            <dt class="col-sm-3">作品ID:</dt>
+            <dd class="col-sm-9">{{ $schedule->movie_id }}</dd>
 
-    <a href="{{ route('admin.schedules.edit', $schedule->id) }}">編集</a>
+            <dt class="col-sm-3">作品名:</dt>
+            <dd class="col-sm-9">{{ $schedule->movie->title }}</dd>
 
-    <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
-        @csrf
-        @method('DELETE')
-        <button type="submit">削除</button>
-    </form>
+            <dt class="col-sm-3">開始時刻:</dt>
+            <dd class="col-sm-9">{{ $schedule->start_time->format('Y年m月d日 H:i') }}</dd>
+
+            <dt class="col-sm-3">終了時刻:</dt>
+            <dd class="col-sm-9">{{ $schedule->end_time->format('Y年m月d日 H:i') }}</dd>
+
+            <dt class="col-sm-3">作成日時:</dt>
+            <dd class="col-sm-9">{{ $schedule->created_at->format('Y年m月d日 H:i:s') }}</dd>
+
+            <dt class="col-sm-3">更新日時:</dt>
+            <dd class="col-sm-9">{{ $schedule->updated_at->format('Y年m月d日 H:i:s') }}</dd>
+        </dl>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ route('admin.schedules.edit', $schedule->id) }}" class="btn btn-primary me-2">
+            <i class="fas fa-edit"></i> 編集
+        </a>
+
+        <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" method="POST" class="d-inline" onsubmit="return confirm('本当に削除しますか？');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> 削除
+            </button>
+        </form>
+    </div>
+</div>
 @endsection
