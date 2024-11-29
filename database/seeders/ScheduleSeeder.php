@@ -14,17 +14,24 @@ class ScheduleSeeder extends Seeder
         $movies = Movie::all();
 
         foreach ($movies as $movie) {
-            $numberOfSchedules = rand(2, 3); // 各映画に対して2〜3のスケジュールを作成
+            $numberOfSchedules = rand(2, 3);
 
             for ($i = 0; $i < $numberOfSchedules; $i++) {
-                $startTime = Carbon::today()->addDays(rand(0, 14))->setHour(rand(10, 20))->setMinute(0);
+                $fixedDate = Carbon::create(2050, 1, 1);
+                $startTime = $fixedDate->copy()->setHour(rand(10, 20))->setMinute(0)->setSecond(0);
+                // $startTime = Carbon::createFromTime(rand(10, 20), 0, 0);
                 $endTime = $startTime->copy()->addHours(2);
 
-                Schedule::factory()->create([
-                    'movie_id' => $movie->id,
-                    'start_time' => $startTime,
-                    'end_time' => $endTime,
-                ]);
+                try {
+                    Schedule::create([
+                        'movie_id' => $movie->id,
+                        'start_time' => $startTime,
+                        'end_time' => $endTime,
+                    ]);
+                } catch (\Exception $e) {
+                    // エラーメッセージをログに出力
+                    \Log::error('Schedule creation failed: ' . $e->getMessage());
+                }
             }
         }
     }

@@ -38,7 +38,7 @@
                     <td>{{ $reservation->schedule->movie->title }}</td>
                     <!-- <td>{{ strtoupper($reservation->sheet->row . $reservation->sheet->column) }}</td> -->
                     <td>{{ strtoupper($reservation->sheet->number) }}</td>
-                    <td>{{ $reservation->date }} {{ $reservation->schedule->start_time }}</td>
+                    <td>{{ $reservation->date->format('Y-m-d') }} {{ $reservation->schedule->start_time->format('H:i') }}</td>
                     <td>{{ $reservation->name }}</td>
                     <td>{{ $reservation->email }}</td>
                     <td>

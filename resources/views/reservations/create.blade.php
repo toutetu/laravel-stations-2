@@ -6,12 +6,16 @@
         @csrf
         <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
         <input type="hidden" name="sheet_id" value="{{ $sheetId }}">
-        <input type="hidden" name="date" value="{{ $date }}">
+        <input type="hidden" name="date" value="{{ $schedule->start_time }}">
         
         <p>映画: {{ $movie->title }}</p>
-        <p>日付: {{ $date }}</p>
-        <p>時間: {{ $schedule->start_time }}</p>
-        <p>座席番号: {{ $sheetId }}</p>
+        <p><strong>日付:</strong> {{ \Carbon\Carbon::parse($schedule->start_time)->format('Y-m-d') }}</p>
+        <p><strong>開始時刻:</strong> {{ \Carbon\Carbon::parse($schedule->start_time)->format('H:m') }}</p>
+        <p><strong>終了時刻:</strong> {{ \Carbon\Carbon::parse($schedule->end_time)->format('H:m') }}</p>
+        @php
+        $sheet = App\Models\Sheet::find($sheetId);
+        @endphp
+        <p>座席番号: {{ $sheet ? strtoupper($sheet->row) . $sheet->column : 'N/A' }}</p>
 
         <div>
             <label for="name">名前:</label>
@@ -23,6 +27,6 @@
             <input type="email" id="email" name="email" required>
         </div>
 
-        <button type="submit">予約する</button>
+        <button type="submit" class="btn btn-primary">予約する</button>
     </form>
 @endsection

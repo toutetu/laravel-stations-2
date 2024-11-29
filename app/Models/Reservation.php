@@ -29,4 +29,7 @@ class Reservation extends Model
     {
         return $this->belongsTo(Sheet::class);
     }
+    protected $casts = [
+        'date' => 'date',
+    ];
 }

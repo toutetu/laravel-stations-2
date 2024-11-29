@@ -68,20 +68,26 @@ class ReservationController extends Controller
             ->first();
     
         if ($existingReservation) {
-            return redirect()->back()->with('error', 'その座席はすでに予約済みです');
+            return back()->with('error', 'この座席は既に予約されています。');
         }
     
         $validated['is_canceled'] = false;
     
-        Reservation::create($validated);
+        try {
+            Reservation::create($validated);
+        } catch (\Exception $e) {
+            return back()->with('error', '予約の作成中にエラーが発生しました。もう一度お試しください。');
+        }
     
         $schedule = Schedule::findOrFail($validated['schedule_id']);
         $movie_id = $schedule->movie_id;
     
+        $dateOnly = Carbon::parse($validated['date'])->startOfDay();
+    
         return redirect()->route('movies.schedules.sheets', [
             'movie_id' => $movie_id,
             'schedule_id' => $validated['schedule_id'],
-            'date' => $validated['date']
+            'date' => $dateOnly
         ])->with('success', '予約できました');
     }
 }

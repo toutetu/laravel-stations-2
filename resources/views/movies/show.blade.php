@@ -43,9 +43,9 @@
             <tbody>
                 @foreach($movie->schedules as $schedule)
                     <tr>
-                    <td>{{ $schedule->start_time instanceof \DateTime ? $schedule->start_time->format('Y-m-d H:i') : $schedule->start_time }}</td>
-                    <td>{{ $schedule->end_time instanceof \DateTime ? $schedule->end_time->format('Y-m-d H:i') : $schedule->end_time }}</td>
-                    <td><a href="{{ route('movies.schedules.sheets', ['movie_id' => $movie->id, 'schedule_id' => $schedule->id, 'date' => date('Y-m-d')]) }}">
+                    <td>{{ $schedule->start_time instanceof \DateTime ? $schedule->start_time->format('H:i') : $schedule->start_time }}</td>
+                    <td>{{ $schedule->end_time instanceof \DateTime ? $schedule->end_time->format('H:i') : $schedule->end_time }}</td>
+                    <td><a href="{{ route('movies.schedules.sheets', ['movie_id' => $movie->id, 'schedule_id' => $schedule->id, 'date' => \Carbon\Carbon::parse($schedule->start_time)->toDateString()]) }}"  class="btn btn-primary">
                     座席を予約する
                     </a></td>
                     </tr>
@@ -56,5 +56,6 @@
     @else
         <p>現在スケジュールはありません。</p>
     @endif
+    <a href="{{ route('movies.index') }}" class="btn btn-secondary">戻る</a>
 </div>
 @endsection

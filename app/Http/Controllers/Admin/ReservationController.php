@@ -16,12 +16,15 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = Reservation::with(['schedule.movie', 'sheet'])
+            ->whereHas('schedule.movie', function ($query) {
+                $query->where('is_showing', 1);
+            })
             ->whereHas('schedule', function ($query) {
                 $query->where('end_time', '>', Carbon::now());
             })
             ->orderBy('date')
             ->get();
-    
+
         return view('admin.reservations.index', compact('reservations'));
     }
 

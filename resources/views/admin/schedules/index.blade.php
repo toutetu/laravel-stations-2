@@ -27,8 +27,8 @@
                         @foreach($movie->schedules as $schedule)
                             <li class="list-group-item">
                                 <a href="{{ route('admin.schedules.show', $schedule->id) }}">
-                                    開始時刻: {{ $schedule->start_time->format('Y-m-d H:i') }} - 
-                                    終了時刻: {{ $schedule->end_time->format('Y-m-d H:i') }}
+                                    開始時刻: {{ $schedule->start_time->format('H:i') }} - 
+                                    終了時刻: {{ $schedule->end_time->format('H:i') }}
                                 </a>
                             </li>
                         @endforeach
