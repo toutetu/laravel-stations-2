@@ -71,6 +71,7 @@ services:
             MYSQL_USER: ${DOCKER_DB_USERNAME:-dev}
             MYSQL_PASSWORD: ${DOCKER_DB_PASSWORD:-dev}
             MYSQL_DATABASE: ${DOCKER_DB_DATABASE:-laravel_stations}
+            # この行が無いと、テストが通らない
             MYSQL_TCP_PORT: ${DOCKER_DB_PORT:-53306}
         ports:
             - "${DOCKER_DB_PORT:-53306}:${DOCKER_DB_PORT:-53306}"
